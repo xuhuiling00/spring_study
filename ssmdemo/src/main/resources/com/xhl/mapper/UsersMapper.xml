@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xhl.mapper.UsersInter">
+    <select id="getOne" parameterType="string" resultType="com.xhl.pojo.Users">
+    select * from users where uname = #{uname}
+  </select>
+
+    <select id="insertOne" parameterType="com.xhl.pojo.Users" >
+        insert into users (`uid`,`uname`,`pwd`,`cdate`,`money`) values (null,#{uname},#{pwd},NOW(),#{money});
+    </select>
+
+    <select id="updateOne" parameterType="com.xhl.pojo.Users">
+        UPDATE users SET cdate=NOW(), money=#{money} WHERE uname=#{uname}
+    </select>
+
+    <select id="deleteOne" parameterType="com.xhl.pojo.Users">
+        delete from users where uid = #{uid}
+    </select>
+</mapper>

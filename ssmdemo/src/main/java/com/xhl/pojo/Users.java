@@ -53,4 +53,14 @@ public class Users {
         this.money = money;
     }
 
+    @Override
+    public String toString() {
+        return "Users{" +
+                "uid=" + uid +
+                ", uname='" + uname + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", cdate=" + cdate +
+                ", money=" + money +
+                '}';
+    }
 }

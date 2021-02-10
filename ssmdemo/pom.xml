@@ -88,6 +88,12 @@
       <version>4.3.19.RELEASE</version>
     </dependency>
 
+<!--    mybatis-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.5.3</version>
+    </dependency>
   </dependencies>
 
   <build>
