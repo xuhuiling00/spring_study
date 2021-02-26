@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
-//@ComponentScan(basePackages = {"com.xhl"})
+@MapperScan(basePackages = "com.xhl.mapper")
+@ComponentScan(basePackages = {"com.xhl","org.n3r.idworker"})
 
 public class Application {
 	public static void main(String[] args) {

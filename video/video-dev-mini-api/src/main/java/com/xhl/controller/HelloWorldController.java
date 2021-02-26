@@ -16,7 +16,7 @@ public class HelloWorldController {
 	}
 	@RequestMapping("/")
 	public String index() {
-		return "Welcome to use show-api";
+		return "Welcome to use video-api";
 	}
 	
 }

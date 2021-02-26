@@ -10,7 +10,6 @@
     <modules>
         <module>../video-dev-common</module>
         <module>../video-dev-pojo</module>
-        <module>../video-dev-pojo</module>
         <module>../video-dev-mapper</module>
         <module>../video-dev-service</module>
         <module>../video-dev-mini-api</module>
