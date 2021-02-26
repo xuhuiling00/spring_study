@@ -6,6 +6,7 @@ import com.xhl.utils.VideoJsonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import jdk.jfr.ValueDescriptor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ import com.xhl.service.UserService;
 import com.xhl.utils.MD5Utils;
 
 @RestController
-@Api(value = "用户注册的接口 ", tags = { "注册和登陆的controller" })
+@Api(value = "用户登录注册的接口 ", tags = { "注册和登陆的controller" })
 public class RegistLoginController{
 	@Autowired
 	private UserService userService;
 
 	/**
-	 * 用户注册接口
+	 * http://localhost:8080/swagger-ui.html 用户注册接口
 	 */
 	@ApiOperation(value = "注册", notes = "用户注册的接口")
 	@ApiImplicitParam(name = "userId", value = "用户id",
@@ -57,6 +58,28 @@ public class RegistLoginController{
 		//为了安全性考虑不设置密码为空
 		user.setPassword("");
 		return VideoJsonResult.ok(user);
+	}
+
+	/**
+	 * http://localhost:8080/swagger-ui.html 用户登陆接口
+	 */
+	@ApiOperation(value = "登陆", notes = "用户注册的接口")
+	@PostMapping("/login")
+	public VideoJsonResult login(@RequestBody Users user) throws Exception {
+		// 1.用户和密码是否为空 不能为空
+		if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())) {
+			return VideoJsonResult.errorMsg("小主,用户名和密码不能为空哦");
+		}
+		// 判断用户是否存在
+		Users userResult = userService.queryUserForLogin(user.getUsername(),MD5Utils.getMD5Str(user.getPassword()));
+
+		if (userResult != null) {
+			userResult.setPassword("");
+			return VideoJsonResult.ok(userResult);
+		} else {
+			return VideoJsonResult.errorMsg("小主,你的账号或密码错误");
+		}
+
 	}
 
 

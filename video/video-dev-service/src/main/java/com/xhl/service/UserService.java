@@ -8,6 +8,8 @@ public interface UserService {
     public boolean queryUsernameIsExist(String username);
     //保存用户名
     public void saveUser(Users user);
+    //根据用户名和密码查询
+    public Users queryUserForLogin(String username, String password);
     //查询一个用户
     public Users getUser(String user);
     //修改用户信息
@@ -22,4 +24,6 @@ public interface UserService {
     public void userUnFollow(String userId, String fanId);
     //查詢视频的发布者是否被我追随
     public boolean queryIsFollowed(String userId, String fanId);
+
+
 }
