@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/video-dev/pom.xml" />
         <option value="$PROJECT_DIR$/video-dev-pojo/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-generatorConfig/pom.xml" />
       </list>
     </option>
   </component>
