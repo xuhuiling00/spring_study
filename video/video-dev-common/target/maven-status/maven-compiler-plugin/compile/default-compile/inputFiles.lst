@@ -10,7 +10,9 @@ D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\com\xhl\utils\
 D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\org\n3r\idworker\strategy\DayPrefixRandomCodeStrategy.java
 D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\org\n3r\idworker\utils\Serializes.java
 D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\org\n3r\idworker\IdWorker.java
+D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\com\xhl\utils\JsonUtils.java
 D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\org\n3r\idworker\WorkerIdStrategy.java
+D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\com\xhl\utils\RedisOperator.java
 D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\org\n3r\idworker\utils\Ip.java
 D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\org\n3r\idworker\DayCode.java
 D:\IdeaProjects\spring_study\video\video-dev-common\src\main\java\com\xhl\utils\MD5Utils.java
