@@ -1,7 +1,6 @@
 package com.xhl.service;
 
 import com.xhl.pojo.Users;
-import org.springframework.stereotype.Service;
 
 
 public interface UserService {

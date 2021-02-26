@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xhl.mapper.IndexMapper">
+
+    <select id="getDefaultReply" resultType="string">
+        select reply from replycontent where cid = 1
+    </select>
+    <select id="getAutoRaply" resultType="string">
+        select reply from replycontent where cid = 2
+    </select>
+    <select id="getReplyByKeyWord" parameterType="map" resultType="string">
+        select reply from replycontent where keyword = #{keyword}
+    </select>
+    <select id="getReplyByWords" parameterType="map" resultType="string">
+        select reply from replycontent where words like #{words}
+    </select>
+    <!--获取所有数据-->
+    <select id="getAll" resultType="ReplyContent">
+        select id,keyword,words,reply,cid,create_time,update_time from replycontent
+    </select>
+
+    <insert id="addOne" parameterType="ReplyContent">
+        insert into replycontent values
+        (null,#{keyword},#{words},#{reply},#{cid},now(),now())
+    </insert>
+
+    <delete id="deleteOne" parameterType="integer">
+        delete from replycontent where id = #{id}
+    </delete>
+
+</mapper>

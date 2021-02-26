@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!--     读取外部配置文件-->
+<!--    <properties resource="jdbc.properties"/>-->
+
+<!--    设置类的别名，简化书写-->
+    <typeAliases>
+        <package name="com.xhl.pojo"/>
+    </typeAliases>
+
+<!--    <environments default="development">-->
+<!--        <environment id="development">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="#{jdbc.driver}"/>-->
+<!--                <property name="url" value="#{jdbc.url}"/>-->
+<!--                <property name="username" value="#{jdbc.username}"/>-->
+<!--                <property name="password" value="#{jdbc.password}"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+<!--    </environments>-->
+
+    <mappers>
+        <package name="com.xhl.mapper"/>
+    </mappers>
+
+</configuration>

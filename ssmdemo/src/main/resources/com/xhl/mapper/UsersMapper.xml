@@ -7,15 +7,15 @@
     select * from users where uname = #{uname}
   </select>
 
-    <select id="insertOne" parameterType="com.xhl.pojo.Users" >
+    <select id="insertOne" parameterType="com.xhl.pojo.Users" resultType="java.lang.Integer">
         insert into users (`uid`,`uname`,`pwd`,`cdate`,`money`) values (null,#{uname},#{pwd},NOW(),#{money});
     </select>
 
-    <select id="updateOne" parameterType="com.xhl.pojo.Users">
+    <select id="updateOne" parameterType="com.xhl.pojo.Users" resultType="java.lang.Integer">
         UPDATE users SET cdate=NOW(), money=#{money} WHERE uname=#{uname}
     </select>
 
-    <select id="deleteOne" parameterType="com.xhl.pojo.Users">
+    <select id="deleteOne" parameterType="com.xhl.pojo.Users" resultType="java.lang.Integer">
         delete from users where uid = #{uid}
     </select>
 </mapper>
