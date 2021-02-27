@@ -57,13 +57,6 @@ public class RegistLoginController extends BasicController{
 		//为了安全性考虑不设置密码为空
 		user.setPassword("");
 
-//		String token = UUID.randomUUID().toString();
-//		redis.set(User_REDIS_SESSION + ":" + user.getId(), token, 60 * 1000 * 30);//30分钟
-//
-//		UsersVo userVo = new UsersVo();
-//		BeanUtils.copyProperties(user, userVo);
-//		userVo.setUserToken(token);
-
 		UsersVo userVo = setUserRedisSessionToken(user);
 
 		return VideoJsonResult.ok(userVo);
@@ -72,7 +65,7 @@ public class RegistLoginController extends BasicController{
 	/**
 	 * http://localhost:8080/swagger-ui.html 用户登陆接口
 	 */
-	@ApiOperation(value = "登陆", notes = "用户注册的接口")
+	@ApiOperation(value = "登陆", notes = "用户登录的接口")
 	@PostMapping("/login")
 	public VideoJsonResult login(@RequestBody Users user) throws Exception {
 		// 1.用户和密码是否为空 不能为空

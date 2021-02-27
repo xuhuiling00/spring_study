@@ -11,10 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
+	@Resource
 	private UsersMapper userMapper;
 
 	@Autowired
@@ -43,7 +46,10 @@ public class UserServiceImpl implements UserService {
 		user.setId(userId);
 		userMapper.insert(user);
 	}
-
+	/**
+	 * 登录查询，根据用户名密码
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS)
 	@Override
 	public Users queryUserForLogin(String username, String password) {
 		Example userExample = new Example(Users.class);
@@ -54,6 +60,10 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
+	/**
+	 * 根据用户名获取用户
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS)
 	@Override
 	public Users getUser(String username) {
 		Users user = new Users();
@@ -62,14 +72,30 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	/**
+	 * 更新用户信息
+	 */
+	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public void updateUserInfo(Users user) {
-
+		Example userExample = new Example(Users.class);
+		Criteria criteria = userExample.createCriteria();
+		criteria.andEqualTo("id",user.getId());
+		//updateByExampleSelective：那个属性有值就更新哪个
+		userMapper.updateByExampleSelective(user,userExample);
 	}
 
+	/**
+	 * 根据id查询用户信息
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS)
 	@Override
 	public Users queryUserInfo(String userid) {
-		return null;
+		Example userExample = new Example(Users.class);
+		Criteria criteria = userExample.createCriteria();
+		criteria.andEqualTo("id",userid);
+		Users users = userMapper.selectOneByExample(userExample);
+		return users;
 	}
 
 	@Override
