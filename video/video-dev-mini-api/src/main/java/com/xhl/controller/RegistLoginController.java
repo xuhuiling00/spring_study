@@ -28,8 +28,6 @@ public class RegistLoginController extends BasicController{
 	 * http://localhost:8080/swagger-ui.html 用户注册接口
 	 */
 	@ApiOperation(value = "注册", notes = "用户注册的接口")
-	@ApiImplicitParam(name = "userId", value = "用户id",
-			required = true, dataType = "String", paramType = "query")
 	@PostMapping("/regist")
 	public VideoJsonResult regist(@RequestBody Users user) {
 		// 1.用户和密码是否为空 不能为空
@@ -94,6 +92,15 @@ public class RegistLoginController extends BasicController{
 
 	}
 
+	@ApiOperation(value = "用户注销", notes = "用户注销接口")
+	@ApiImplicitParam(name = "userId", value = "用户id",
+			required = true, dataType = "String", paramType = "query")
+	@PostMapping("/logout")
+	public VideoJsonResult logout(String userId) throws InterruptedException {
+		//
+		redis.del(User_REDIS_SESSION + ":" + userId);// redis删除对应的id
+		return VideoJsonResult.ok();
+	}
 
 	public UsersVo setUserRedisSessionToken(Users userModel) {
 		String token = UUID.randomUUID().toString();
