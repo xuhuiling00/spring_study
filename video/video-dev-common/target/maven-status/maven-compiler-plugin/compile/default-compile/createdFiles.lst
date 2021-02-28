@@ -1,4 +1,6 @@
 com\xhl\utils\RedisOperator.class
 com\xhl\utils\VideoJsonResult.class
 com\xhl\utils\MD5Utils.class
+com\xhl\utils\FetchVideo.class
 com\xhl\utils\JsonUtils.class
+com\xhl\utils\MergeVideo.class

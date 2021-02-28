@@ -1,1 +1,5 @@
 com\xhl\pojo\vo\UsersVo.class
+com\xhl\pojo\vo\VideosVo.class
+com\xhl\pojo\PageResult.class
+com\xhl\pojo\VideoStatusEnum.class
+com\xhl\pojo\Category.class

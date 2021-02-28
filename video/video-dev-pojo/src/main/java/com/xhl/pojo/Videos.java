@@ -7,38 +7,63 @@ import java.util.Date;
 public class Videos {
     @Id
     private String id;
-
+    //用户id
     @Column(name = "user_id")
     private String userId;
-
+    //bgmid
     @Column(name = "audio_id")
     private String audioId;
-
+    //视频描述
     @Column(name = "video_desc")
     private String videoDesc;
-
+    //视频地址
     @Column(name = "video_path")
     private String videoPath;
-
+    //背景音乐长度
     @Column(name = "video_seconds")
     private Float videoSeconds;
-
+    //视频宽度
     @Column(name = "video_width")
     private Integer videoWidth;
-
+    //视频高度
     @Column(name = "video_height")
     private Integer videoHeight;
-
+    //封面
     @Column(name = "cover_path")
     private String coverPath;
-
+    //获赞数
     @Column(name = "like_counts")
     private Long likeCounts;
-
+    //视频状态
     private Integer status;
-
+    //上传时间
     @Column(name = "create_time")
     private Date createTime;
+
+    @Column(name = "video_filter")
+    private String videoFileter;//视频的滤镜
+
+    //视频分类
+    @Column(name="video_category")
+    private String videoCategory;
+
+    public String getVideoCategory() {
+        return videoCategory;
+    }
+
+    public void setVideoCategory(String videoCategory) {
+        this.videoCategory = videoCategory;
+    }
+
+    public String getVideoFileter() {
+        return videoFileter;
+    }
+
+
+
+    public void setVideoFileter(String videoFileter) {
+        this.videoFileter = videoFileter;
+    }
 
     /**
      * @return id
