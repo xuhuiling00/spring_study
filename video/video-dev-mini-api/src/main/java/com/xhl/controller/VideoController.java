@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.xhl.mapper.SearchRecordsMapper;
 import com.xhl.service.BgmService;
 import com.xhl.service.VideoService;
 import com.xhl.utils.FetchVideo;
@@ -222,18 +223,15 @@ public class VideoController extends BasicController {
 //		return VideoJsonResult.ok();
 //	}
 
-	/**
-	 * 分页和搜索查询列表 issave=1 需要保存 issave=0 不需要保存 或者为空的时候
-	 *
-	 */
+	
 	// 热搜
-//	@PostMapping(value = "/hot") // isSaveRecord 是否保存记录
-//	public VideoJsonResult hot() {
-//		return VideoJsonResult.ok(videoService.getHotWords());
-//	}
+	@PostMapping(value = "/hot")
+	public VideoJsonResult hot() {
+		return VideoJsonResult.ok(videoService.getHotWords());
+	}
 //
 	@ApiOperation(value = "查询(某条件下)所有视频", notes = "视频查询接口")
-	@PostMapping(value = "/showAll") // isSaveRecord 是否保存记录
+	@PostMapping(value = "/showAll") // isSaveRecord 是否保存记录 (1:需要保存）
 	public VideoJsonResult showAll(@RequestBody Videos video, Integer isSaveRecord, Integer page, String category) {
 		if (page == null) {
 			page = 1;

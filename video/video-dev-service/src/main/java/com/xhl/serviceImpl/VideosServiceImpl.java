@@ -141,14 +141,14 @@ public class VideosServiceImpl implements VideoService {
 		// 1.保存用户的喜欢点赞和关联关系表
 		// 2.视频喜欢的数量累加
 		// 3.用户受喜欢数量的累加
-//		String likeId = sid.nextShort();
-//		UsersLikeVideos ulv = new UsersLikeVideos();
-//		ulv.setId(likeId);
-//		ulv.setUserId(userId);
-//		ulv.setVideoId(videoId);
-//		usersLikeVideosMapper.insert(ulv);
-//		videosVoMapper.addVideoLikeCount(videoId);
-//		usersMapper.addReceiveLikeCount(videoCreaterId);
+		String likeId = sid.nextShort();
+		UsersLikeVideos ulv = new UsersLikeVideos();
+		ulv.setId(likeId);
+		ulv.setUserId(userId);
+		ulv.setVideoId(videoId);
+		usersLikeVideosMapper.insert(ulv);
+		videosVoMapper.addVideoLikeCount(videoId);
+		usersMapper.addReceiveLikeCount(videoCreaterId);
 	}
 
 	@Override
@@ -159,19 +159,18 @@ public class VideosServiceImpl implements VideoService {
 		 * ulv.setId(likeId); ulv.setUserId(userId); ulv.setUserId(videoId);
 		 */
 
-//		Example example = new Example(UsersLikeVideos.class);
-//		Criteria criteria = example.createCriteria();
-//		criteria.andEqualTo("userId", userId);
-//		criteria.andEqualTo("videoId", videoId);
-//		usersLikeVideosMapper.deleteByExample(example);
-//		videosVoMapper.reduceAddVideoLikeCount(videoId);
-//		usersMapper.reduceReceiveLikeCount(videoCreaterId);
+		Example example = new Example(UsersLikeVideos.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("userId", userId);
+		criteria.andEqualTo("videoId", videoId);
+		usersLikeVideosMapper.deleteByExample(example);
+		videosVoMapper.reduceAddVideoLikeCount(videoId);
+		usersMapper.reduceReceiveLikeCount(videoCreaterId);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<String> getHotWords() {
-//		return searchRecordsMapper.getHotWords();
-		return null;
+		return searchRecordsMapper.getHotWords();
 	}
 
 	/**
@@ -194,9 +193,8 @@ public class VideosServiceImpl implements VideoService {
 	@Override
 	public List<CommentsVo> queryCommentsByVideoId(String videoId) {
 		// 根据当前的Video的id号来查询出挡墙的视频的所有评论
-//		List<CommentsVo> commentsAll = commentsMapper.queryAllByVideoId(videoId);
-//		return commentsAll;
-		return null;
+		List<CommentsVo> commentsAll = commentsMapper.queryAllByVideoId(videoId);
+		return commentsAll;
 	}
 
 	// 根据当前用户的id查询出当前用户所上传的所有视频

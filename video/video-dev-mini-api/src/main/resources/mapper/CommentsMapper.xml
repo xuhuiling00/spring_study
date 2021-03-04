@@ -12,4 +12,12 @@
     <result column="comment" jdbcType="LONGVARCHAR" property="comment" />
   </resultMap>
 
+  <select id="queryAllByVideoId" resultType="com.xhl.pojo.vo.CommentsVo"  parameterType="String">
+           select u.nickname,c.id,c.comment,c.create_time as
+           createTime ,c.from_user_id as fromUserId,
+           video_id as videoId from comments c
+           left join users u on u.id = c.from_user_id
+           where video_id = #{videoId} order by c.create_time desc
+   </select>
+
 </mapper>

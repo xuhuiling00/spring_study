@@ -1,7 +1,11 @@
 package com.xhl.serviceImpl;
 
+import com.xhl.mapper.UsersFansMapper;
+import com.xhl.mapper.UsersLikeVideosMapper;
 import com.xhl.mapper.UsersMapper;
 import com.xhl.pojo.Users;
+import com.xhl.pojo.UsersFans;
+import com.xhl.pojo.UsersLikeVideos;
 import com.xhl.service.UserService;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +23,10 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UsersMapper userMapper;
-
+	@Resource
+	private UsersLikeVideosMapper usersLikeVideosMapper;
+	@Resource
+	private UsersFansMapper userFansMapper;
 	@Autowired
 	private Sid sid;
 	/**
@@ -98,24 +105,60 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
+	//查询用户是否点赞视频
 	@Override
 	public Boolean isUserLikeVideo(String userId, String videoId) {
-		return null;
+		Example userExample = new Example(UsersLikeVideos.class);// 创建一个模板 条件
+		Criteria criteria = userExample.createCriteria();
+		criteria.andEqualTo("userId", userId);
+		criteria.andEqualTo("videoId", videoId);
+		List<UsersLikeVideos> ls = usersLikeVideosMapper.selectByExample(userExample);// 查询excample
+		if (ls != null && ls.size() > 0) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public void userFollow(String userId, String fanId) {
 		//1.粉丝id和用户id关联
 		//2.更新up主的的粉丝数量
+		//3.更新用户关注数量
+		UsersFans userFans = new UsersFans();
+		String id = Sid.next();
+		userFans.setId(id);
+		userFans.setUserId(userId);
+		userFans.setFanId(fanId);
+		userFansMapper.insert(userFans);// 增加用戶和粉絲的关系
+		userMapper.addFansCount(userId); // 用户的粉丝数加1 //fanId 粉丝的关注量+1
+		userMapper.followWithAdd(fanId);//增加粉丝的关注量+1
 	}
 
 	@Override
 	public void userUnFollow(String userId, String fanId) {
-
+		// 1.查询出用户
+		// 2.删除相关的关系记录
+		// 3.用户的粉丝数-1
+		Example example=new Example(UsersFans.class);
+		Criteria criteria=example.createCriteria();
+		criteria.andEqualTo("userId",userId);
+		criteria.andEqualTo("fanId",fanId);
+		userFansMapper.deleteByExample(example);
+		userMapper.reduceFansCount(userId);
+		userMapper.followWithReduce(fanId);//粉丝的关注量-1
 	}
 
+	//查询是否关注用户
 	@Override
 	public boolean queryIsFollowed(String userId, String fanId) {
+		Example userExample = new Example(UsersFans.class);// 创建一个模板 条件
+		Criteria criteria = userExample.createCriteria();
+		criteria.andEqualTo("userId", userId);
+		criteria.andEqualTo("fanId", fanId);
+		List<UsersFans> ls = userFansMapper.selectByExample(userExample);// 查询excample
+		if (ls != null && ls.size() > 0) {
+			return true;
+		}
 		return false;
 	}
 }
