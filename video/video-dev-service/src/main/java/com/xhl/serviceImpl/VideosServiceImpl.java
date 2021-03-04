@@ -106,20 +106,25 @@ public class VideosServiceImpl implements VideoService {
 		return pageResult;
 	}
 	/*
-	 * @Override public PageResult getAllVideos(Integer page, Integer
-	 * pageSize,String category) { //对查询进行优化 PageHelper.startPage(page, pageSize);
-	 * List<VideosVo> list = videosVoMapper.queryAllVideos(null); PageInfo<VideosVo>
-	 * pageList = new PageInfo<>(list); PageResult pageResult = new PageResult();
-	 * pageResult.setPage(page); pageResult.setTotal(pageList.getPages());
-	 * pageResult.setRows(list); pageResult.setRecords(pageList.getTotal()); return
-	 * pageResult; }
+	 * @Override
+	 * public PageResult getAllVideos(Integer page, Integer pageSize,String category)
+	 * { //对查询进行优化
+	 * PageHelper.startPage(page, pageSize);
+	 * List<VideosVo> list = videosVoMapper.queryAllVideos(null);
+	 * PageInfo<VideosVo> pageList = new PageInfo<>(list);
+	 * PageResult pageResult = new PageResult();
+	 * pageResult.setPage(page);
+	 * pageResult.setTotal(pageList.getPages());
+	 * pageResult.setRows(list);
+	 * pageResult.setRecords(pageList.getTotal());
+	 * return pageResult; }
 	 */
-//	//根据分类去查询当前视频
-//	public PageResult getAllVideos(Integer page, Integer pageSize,String category) 
+	//根据分类去查询当前视频
+//	public PageResult getAllVideos(Integer page, Integer pageSize,String category)
 //	{
 //		//对查询进行优化
 //		PageHelper.startPage(page, pageSize);
-//		List<VideosVo> list = videosVoMapper.queryAllVideos(null);
+//		List<VideosVo> list = videosVoMapper.queryAllVideos(null,category);
 //		PageInfo<VideosVo> pageList = new PageInfo<>(list);
 //		PageResult pageResult = new PageResult();
 //		pageResult.setPage(page);

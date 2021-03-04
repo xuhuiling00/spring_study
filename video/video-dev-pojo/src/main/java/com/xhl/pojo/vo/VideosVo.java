@@ -3,7 +3,6 @@ package com.xhl.pojo.vo;
 import java.util.Date;
 /**
  * 关联查询
- * @author Ray
  */
 public class VideosVo {
 	private String id;

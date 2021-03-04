@@ -22,7 +22,7 @@ public class BgmController {
 	public VideoJsonResult list() {
 		return VideoJsonResult.ok(bgmService.queryBgmList());
 	}
-	@ApiOperation(value = "列表", notes = "获取视频分类列表")
+
 	@PostMapping("/listVideoCategory")
 	public VideoJsonResult listVideoCategory() {
 		

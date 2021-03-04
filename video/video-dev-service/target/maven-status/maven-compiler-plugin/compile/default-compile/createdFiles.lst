@@ -1,6 +1,8 @@
 com\xhl\service\VideoService.class
+com\xhl\service\CategoryService.class
 com\xhl\serviceImpl\BgmServiceImpl.class
 com\xhl\service\UserService.class
-com\xhl\serviceImpl\UserServiceImpl.class
 com\xhl\service\BgmService.class
+com\xhl\serviceImpl\CategoryServiceImpl.class
+com\xhl\serviceImpl\UserServiceImpl.class
 com\xhl\serviceImpl\VideosServiceImpl.class

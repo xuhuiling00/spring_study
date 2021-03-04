@@ -109,7 +109,7 @@ public class UserController extends BasicController {
 
 
 
-	@ApiOperation(value = "查询信息接口", notes = "查询用户信息接口")
+	@ApiOperation(value = "查询信息", notes = "查询用户信息接口")
 	@ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "String", paramType = "query")
 	@PostMapping("/query")
 	public VideoJsonResult uploadFace(String userId)
@@ -123,12 +123,8 @@ public class UserController extends BasicController {
 	   BeanUtils.copyProperties(userInfo, userVO);
        return VideoJsonResult.ok(userVO);		
 	}
-	/**
-	 * 查询是否被跟随
-	 * @param userId
-	 * @param
-	 * @return
-	 */
+
+	@ApiOperation(value = "查询是否关注用户", notes = "查询用户关注信息接口")
 	@PostMapping("/queryIsFollowed")
 	public VideoJsonResult queryIsFollowed(String userId,String fanId)
 	{
@@ -139,6 +135,8 @@ public class UserController extends BasicController {
 	   boolean isFollowed=userService.queryIsFollowed(userId, fanId);
        return VideoJsonResult.ok(isFollowed);		
 	}
+
+	@ApiOperation(value = "查询up主的信息", notes = "查询up主信息接口")
 	@PostMapping("/queryPublisher")
 	public VideoJsonResult queryPublisher(String loginUserId,String videoId,String publisherUserId)
 	{
@@ -148,8 +146,8 @@ public class UserController extends BasicController {
 	       return VideoJsonResult.errorMsg("");
 		}
 
-	//1.查询视频发布者的信息 
-    //2.查询当前登录者和视频的点赞关系
+		//1.查询视频发布者的信息
+		//2.查询当前登录者和视频的点赞关系
 	   Users userInfo=userService.queryUserInfo(publisherUserId);
 	   UsersVo publisher=new UsersVo();
 	   BeanUtils.copyProperties(userInfo, publisher);
@@ -160,13 +158,16 @@ public class UserController extends BasicController {
 	   publish.setUserLikeVideo(userLikeVideo);
        return VideoJsonResult.ok(publish);		
 	}
-	
+
+	@ApiOperation(value = "关注up", notes = "关注up主接口")
 	@PostMapping(value = "/userFollow" )//用戶跟随
 	public VideoJsonResult userFollow(String userId,String fanId)//用户的id 用户的关注的id 
 	{
 		userService.userFollow(userId,fanId);
 		return VideoJsonResult.ok();
 	}
+
+	@ApiOperation(value = "取消关注", notes = "取关up主接口")
 	@PostMapping(value = "/userUnFollow" )//用戶跟随
 	public VideoJsonResult userUnFollow(String userId,String fanId)//用户的id 用户的关注的id 
 	{ 

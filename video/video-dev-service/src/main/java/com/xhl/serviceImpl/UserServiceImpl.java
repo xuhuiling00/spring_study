@@ -105,7 +105,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void userFollow(String userId, String fanId) {
-
+		//1.粉丝id和用户id关联
+		//2.更新up主的的粉丝数量
 	}
 
 	@Override

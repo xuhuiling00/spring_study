@@ -48,14 +48,14 @@ public class VideoController extends BasicController {
 
 	@ApiOperation(value = "用户上传视频", notes = "用户上传视频接口")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String", paramType = "form"),
 			@ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "String", paramType = "form"),
 			@ApiImplicitParam(name = "bgmId", value = "背景音乐id", required = false, dataType = "String", paramType = "form"), //// 可以不指定
-			@ApiImplicitParam(name = "videoSeconds", value = "视频时间", required = true, dataType = "double", paramType = "form"), // 参数类型为form
-			@ApiImplicitParam(name = "videoWidth", value = "视频宽度", required = true, dataType = "int", paramType = "form"),
-			@ApiImplicitParam(name = "videoHeight", value = "视频高度", required = true, dataType = "int", paramType = "form"),
+			@ApiImplicitParam(name = "duration", value = "视频时间", required = false, dataType = "String", paramType = "form"), //// 可以不指定
+			@ApiImplicitParam(name = "tmpWidth", value = "视频宽度", required = true, dataType = "int", paramType = "form"),
+			@ApiImplicitParam(name = "tmpHeight", value = "视频高度", required = true, dataType = "int", paramType = "form"),
 			@ApiImplicitParam(name = "desc", value = "视频描述", required = false, dataType = "String", paramType = "query"), // 可以不指定
-			@ApiImplicitParam(name = "videoCategory", value = "视频分类", required = false, dataType = "String", paramType = "query")// 可以不指定
+			@ApiImplicitParam(name = "videoCategory", value = "视频分类", required = false, dataType = "String", paramType = "query"),// 可以不指定
+			@ApiImplicitParam(name = "videoFilter", value = "视频滤镜", required = false, dataType = "String", paramType = "query")// 可以不指定
 
 	})
 	@PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
@@ -82,7 +82,7 @@ public class VideoController extends BasicController {
 			try {
 				if (StringUtils.isNotBlank(fileName)) {
 					// 文件上传的最终保存路径
-					finalVideoPath = File_Space + "/" + uploadPathDB + "/" + fileName;
+					finalVideoPath = File_Space + uploadPathDB + "/" + fileName;
 					// 数据库保存路径
 					uploadPathDB += ("/" + fileName);
 					File outFile = new File(finalVideoPath);
@@ -117,7 +117,7 @@ public class VideoController extends BasicController {
 				MergeVideo tool = new MergeVideo(FFMPEGEXE);
 				if (StringUtils.isNotBlank(bgmId)) {
 					Bgm bgm = bgmService.queryBgmById(bgmId);
-					String mp3InputPath = File_Space + bgm.getPath();// 得到路径
+					String mp3InputPath = File_Space +  bgm.getPath();// 得到路径
 
 					String videoInputPath = finalVideoPath;
 					String outPathName = UUID.randomUUID().toString() + ".mp4";
@@ -232,61 +232,66 @@ public class VideoController extends BasicController {
 //		return VideoJsonResult.ok(videoService.getHotWords());
 //	}
 //
-//	@PostMapping(value = "/showAll") // isSaveRecord 是否保存记录
-//	public VideoJsonResult showAll(@RequestBody Videos video, Integer isSaveRecord, Integer page, String category) {
-//		if (page == null) {
-//			page = 1;
-//		}
-//		PageResult pageResult = videoService.getAllVideos(video, isSaveRecord, page, PAGE_SIZE, category);
-//		System.out.println(pageResult.toString());
-//		return VideoJsonResult.ok(pageResult);
-//	}
-//
-//	@PostMapping(value = "/userLike") // isSaveRecord 是否保存记录
-//	public VideoJsonResult userLike(String userId, String videoId, String videoCreaterId) {
-//		videoService.userLikeVideo(userId, videoId, videoCreaterId);
-//		return VideoJsonResult.ok();
-//	}
-//
-//	@PostMapping(value = "/userUnLike") // isSaveRecord 是否保存记录
-//	public VideoJsonResult userUnLike(String userId, String videoId, String videoCreaterId) {
-//		videoService.userUnLikeVideo(userId, videoId, videoCreaterId);
-//		return VideoJsonResult.ok();
-//	}
-//
-//	// 保存用户的评论到数据库
-//	@PostMapping(value = "/saveComments") // isSaveRecord 是否保存记录
-//	public VideoJsonResult saveComments(String userId, String videoId, String comment) {
-//		videoService.saveComment(userId, videoId, comment);
-//		return VideoJsonResult.ok();
-//	}
-//
-//	// 保存用户的评论到数据库
-//	@PostMapping(value = "/queryCommentsByVideoId")
-//	public VideoJsonResult queryCommentsByVideoId(String videoId) {
-//		List<CommentsVo> commentsAll = videoService.queryCommentsByVideoId(videoId);
-//		return VideoJsonResult.ok(commentsAll);// 返回当前视频的所有评论
-//	}
-//
-//	// 查询当前用户的所有的视频
-//	@PostMapping(value = "/queryVideosByUser")
-//	public VideoJsonResult queryVideosByUser(String userId) {
-//		List<VideosVo> listVideos = videoService.queryVideosByUser(userId);
-//		return VideoJsonResult.ok(listVideos);
-//	}
-//
-//	/**
-//	 * @param userId      举报人的id
-//	 * @param dealUserId  被举报用户的id
-//	 * @param dealVideoId 被举报视频的id
-//	 * @return
-//	 */
-//	// 举报视频
-//	@PostMapping("/report")
-//	public VideoJsonResult reportVideosByUser(String userId, String dealUserId, String dealVideoId, String title,
-//			String content) {
-//		videoService.reportVideoByUser(dealUserId, dealVideoId, userId, title, content);
-//		return VideoJsonResult.ok();
-//	}
+	@ApiOperation(value = "查询(某条件下)所有视频", notes = "视频查询接口")
+	@PostMapping(value = "/showAll") // isSaveRecord 是否保存记录
+	public VideoJsonResult showAll(@RequestBody Videos video, Integer isSaveRecord, Integer page, String category) {
+		if (page == null) {
+			page = 1;
+		}
+		PageResult pageResult = videoService.getAllVideos(video, isSaveRecord, page, PAGE_SIZE, category);
+		System.out.println(pageResult.toString());
+		return VideoJsonResult.ok(pageResult);
+	}
+
+
+	@ApiOperation(value = "点赞视频", notes = "点赞视频接口")
+	@PostMapping(value = "/userLike") // isSaveRecord 是否保存记录
+	public VideoJsonResult userLike(String userId, String videoId, String videoCreaterId) {
+		videoService.userLikeVideo(userId, videoId, videoCreaterId);
+		return VideoJsonResult.ok();
+	}
+
+	@ApiOperation(value = "取消点赞视频", notes = "取消点赞视频接口")
+	@PostMapping(value = "/userUnLike") // isSaveRecord 是否保存记录
+	public VideoJsonResult userUnLike(String userId, String videoId, String videoCreaterId) {
+		videoService.userUnLikeVideo(userId, videoId, videoCreaterId);
+		return VideoJsonResult.ok();
+	}
+
+	// 保存用户的评论到数据库
+	@ApiOperation(value = "保存视频评论", notes = "保存视频评论接口")
+	@PostMapping(value = "/saveComments") // isSaveRecord 是否保存记录
+	public VideoJsonResult saveComments(String userId, String videoId, String comment) {
+		videoService.saveComment(userId, videoId, comment);
+		return VideoJsonResult.ok();
+	}
+
+	@ApiOperation(value = "查询视频所有评论", notes = "查询视频评论接口")
+	@PostMapping(value = "/queryCommentsByVideoId")
+	public VideoJsonResult queryCommentsByVideoId(String videoId) {
+		List<CommentsVo> commentsAll = videoService.queryCommentsByVideoId(videoId);
+		return VideoJsonResult.ok(commentsAll);// 返回当前视频的所有评论
+	}
+
+	@ApiOperation(value = "查询用户所有视频", notes = "查询用户所有视频接口")
+	@PostMapping(value = "/queryVideosByUser")
+	public VideoJsonResult queryVideosByUser(String userId) {
+		List<VideosVo> listVideos = videoService.queryVideosByUser(userId);
+		return VideoJsonResult.ok(listVideos);
+	}
+
+	/**
+	 * @param userId      举报人的id
+	 * @param dealUserId  被举报用户的id
+	 * @param dealVideoId 被举报视频的id
+	 * @return
+	 */
+	@ApiOperation(value = "举报视频", notes = "举报视频接口")
+	@PostMapping("/report")
+	public VideoJsonResult reportVideosByUser(String userId, String dealUserId, String dealVideoId, String title,
+			String content) {
+		videoService.reportVideoByUser(dealUserId, dealVideoId, userId, title, content);
+		return VideoJsonResult.ok();
+	}
 
 }

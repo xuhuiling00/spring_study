@@ -16,4 +16,6 @@ public class BasicController {
     public static final String File_Space="D:/IdeaProjects/spring_study/video/green_videos_dev";
     //ffmpeg所在目录
     public static final String FFMPEGEXE = "D:\\Downloads\\ffmpeg\\ffmpeg-git-full\\bin\\ffmpeg.exe";
+
+    public static final Integer PAGE_SIZE= 5;
 }

@@ -80,10 +80,13 @@ public class MergeVideo {
 	public void convertor(String mp3InputPath, String videoPath, double seconds, String outPath, String filter) {
 		// ffmpeg.exe -i test.mp4 spring.avi
 		// ffmpeg.exe -i bgm.mp3 -i video.mp4 -t 6 -y xu.mp4
-		/*
-		 * System.out.println(mp3InputPath); System.out.println(videoPath);
-		 * System.out.println(seconds); System.out.println(outPath);
-		 */
+
+		System.out.println(mp3InputPath);
+		System.out.println(videoPath);
+		System.out.println();
+//		System.out.println(seconds);
+//		System.out.println(outPath);
+
 		List<String> command = new ArrayList<>();
 
 		command.add(ffmpegEXE);

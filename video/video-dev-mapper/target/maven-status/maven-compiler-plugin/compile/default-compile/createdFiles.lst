@@ -1,2 +1,10 @@
+com\xhl\mapper\UsersReportMapper.class
 com\xhl\mapper\CategoryMapper.class
+com\xhl\mapper\CommentsMapper.class
+com\xhl\mapper\BgmMapper.class
+com\xhl\mapper\VideosMapper.class
+com\xhl\mapper\UsersLikeVideosMapper.class
+com\xhl\mapper\UsersMapper.class
+com\xhl\mapper\SearchRecordsMapper.class
 com\xhl\mapper\VideosVoMapper.class
+com\xhl\mapper\UsersFansMapper.class

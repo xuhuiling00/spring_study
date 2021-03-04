@@ -1,5 +1,10 @@
+com\xhl\controller\UserController.class
 com\xhl\controller\BgmController.class
 com\xhl\controller\RegistLoginController.class
 com\xhl\Swagger2.class
+com\xhl\controller\HelloWorldController.class
+com\xhl\Application.class
+com\xhl\WebMvcConfig.class
 com\xhl\controller\VideoController.class
+com\xhl\controller\CategoryController.class
 com\xhl\controller\BasicController.class

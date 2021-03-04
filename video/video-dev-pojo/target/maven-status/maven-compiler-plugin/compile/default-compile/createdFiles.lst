@@ -1,5 +1,15 @@
 com\xhl\pojo\vo\UsersVo.class
 com\xhl\pojo\vo\VideosVo.class
+com\xhl\pojo\Bgm.class
+com\xhl\pojo\UsersLikeVideos.class
 com\xhl\pojo\PageResult.class
+com\xhl\pojo\Videos.class
 com\xhl\pojo\VideoStatusEnum.class
+com\xhl\pojo\Users.class
+com\xhl\pojo\UsersFans.class
+com\xhl\pojo\vo\CommentsVo.class
+com\xhl\pojo\Comments.class
 com\xhl\pojo\Category.class
+com\xhl\pojo\SearchRecords.class
+com\xhl\pojo\UsersReport.class
+com\xhl\pojo\vo\Publisher.class
