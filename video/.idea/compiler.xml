@@ -16,6 +16,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="mybatis-generatorConfig" target="9" />
+      <module name="video-admin" target="9" />
       <module name="video-dev" target="9" />
       <module name="video-dev-common" target="9" />
       <module name="video-dev-mapper" target="9" />
